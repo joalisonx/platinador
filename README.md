@@ -16,11 +16,11 @@ O Platinador classifica os jogos em dois estados, sendo eles:
 |Em restrição ⚠|O jogo por algum motivo não está com sua platina obtível. Um exemplo desse caso é um bug conhecido que tem previsão de correção ou queda temporária de servidor.|
 
 ## TODO
-[] Dar funcionalidade ao campo de busca
-[] Paginação
-[] Implementação da API (API da PS Store e API do Platinador)
-[] Modal listando detalhes dos jogos cadastrados
-[] Talvez seja hora de hospedar...
+- [ ] Dar funcionalidade ao campo de busca
+- [ ] Paginação
+- [ ] Implementação da API (API da PS Store e API do Platinador)
+- [ ] Modal listando detalhes dos jogos cadastrados
+- [ ] Talvez seja hora de hospedar...
 
 ## Contribuindo
 Contribuições são bem-vindas. Abra uma **Issue** caso precise reportar algo ou sugerir adições ou alterações.
