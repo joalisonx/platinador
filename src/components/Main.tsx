@@ -1,10 +1,12 @@
 import { For, createSignal, createResource } from "solid-js";
 import { Game } from "./Game";
+import { Pagination } from "./Pagination";
 import { IGame, getGames } from "../utils";
 
 export const Main = () => {
   const [games, {mutate, refetch}] = createResource<IGame[]>(getGames);
   const [filter, setFilter] = createSignal<string>("0");
+  const [searchField, setSearchField] = createSignal<string>("");
   
   return (
     <section class="bg-gray-900">
@@ -19,16 +21,13 @@ export const Main = () => {
         <div class="mt-8 flex items-center justify-between">
           <div class="flex rounded border border-gray-200 text-gray-200">
             <div class="relative">
-              <input
+              <input onInput={ev => setSearchField(ev.currentTarget.value)}
                 type="text" id="search" placeholder=" Pesquisar"
                 class="w-full rounded placeholder-gray-200 bg-transparent h-10 shadow-sm sm:text-sm"
               />
               <span class="grid place-content-center absolute inset-y-0 end-0 w-10">
                 <button type="button">
-                  <svg
-                    class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path
                       stroke-linecap="round" stroke-linejoin="round"
                       d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
@@ -54,6 +53,7 @@ export const Main = () => {
           )}</For>
         </ul>
       </div>
+      <Pagination/>
     </section>
   );
 }

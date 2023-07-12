@@ -6,7 +6,7 @@ export const Game: Component<IGame> = (props: IGame) => {
     <li>
       <div 
         class="flex items-end justify-start w-full h-[256px] rounded-lg relative text-left bg-gray-950 bg-center bg-cover" 
-        style={`background-image: url('${props.image}');`}
+        style={`background-image: url('./src/assets/${props.image}.png');`}
       >
         <div class="absolute top-0 bottom-0 left-0 right-0"></div>
         <div class="flex items-center justify-between mx-5 mt-3 absolute top-0 left-0 right-0">
