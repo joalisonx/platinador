@@ -1,12 +1,13 @@
 import { For, createSignal, createResource } from "solid-js";
+import { IGame, getGames } from "../utils";
 import { Game } from "./Game";
 import { Pagination } from "./Pagination";
-import { IGame, getGames } from "../utils";
 
 export const Main = () => {
-  const [games, {mutate, refetch}] = createResource<IGame[]>(getGames);
+  const [games] = createResource<IGame[]>(getGames);
   const [filter, setFilter] = createSignal<string>("0");
-  const [searchField, setSearchField] = createSignal<string>("");
+  const [search, setSearch] = createSignal<string>("");
+  const filteredGames = () => games()?.filter(i => i.name.toLowerCase().includes(search()));
   
   return (
     <section class="bg-gray-900">
@@ -21,7 +22,7 @@ export const Main = () => {
         <div class="mt-8 flex items-center justify-between">
           <div class="flex rounded border border-gray-200 text-gray-200">
             <div class="relative">
-              <input onInput={ev => setSearchField(ev.currentTarget.value)}
+              <input onInput={ev => setSearch(ev.currentTarget.value.toLowerCase())}
                 type="text" id="search" placeholder=" Pesquisar"
                 class="w-full rounded placeholder-gray-200 bg-transparent h-10 shadow-sm sm:text-sm"
               />
@@ -48,8 +49,8 @@ export const Main = () => {
           </div>
         </div>
         <ul class="grid gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-4">
-          <For each={filter() !== "0" ? games().filter(i => i.state === filter()) : games()}>{game => (
-            <Game name={game.name} platform={game.platform} state={game.state} image={game.image}/>
+          <For each={filter() !== "0" ? filteredGames().filter(i => i.state === filter()) : filteredGames()}>{game => (
+            <Game {...game}/>
           )}</For>
         </ul>
       </div>

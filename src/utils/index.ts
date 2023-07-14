@@ -1,4 +1,4 @@
-import { getGames, getGameImageByTitleId } from "./requester";
+import { getGames, getGameImageById } from "./requester";
 
 enum GamePlatform {
   "PS5" = "bg-blue-900",
@@ -16,15 +16,15 @@ interface IGame {
   name: string;
   platform: string;
   state: string;
-  image?: string;
-  updatedAt?: Date;
-  description?: string;
-  storeId?: string;
+  storeId: string;
+  image: string;
+  updatedAt: Date;
+  description: string;
 }
 
 export {
   getGames,
-  getGameImageByTitleId,
+  getGameImageById,
   GamePlatform,
   GameState
 }
