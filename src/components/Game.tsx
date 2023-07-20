@@ -27,7 +27,7 @@ export const Game: Component<IGame> = (props: IGame) => {
             </span>
           </div>
         </div>
-        <h2 class="text-gray-200 z-10 p-5 font-bold text-xl">
+        <h2 class="text-gray-200 p-5 font-bold text-xl">
           {props.name.length > 21 ? props.name.slice(0, 20) + "..." : props.name}
         </h2>
       </div>
