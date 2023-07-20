@@ -61,7 +61,7 @@ export const Main = () => {
       </section>
 
       <Show when={selectedGame()}>
-        <GameDetails {...selectedGame()}/>
+        <GameDetails {...selectedGame()} setSelectedGame={setSelectedGame}/>
       </Show>
     </>
   );

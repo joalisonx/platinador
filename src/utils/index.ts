@@ -1,3 +1,4 @@
+import { Setter } from "solid-js";
 import { getGames, getGameImageById } from "./requester";
 
 enum GamePlatform {
@@ -9,7 +10,7 @@ enum GamePlatform {
 
 const GameState = {
   "1": "bg-red-700",
-  "2": "bg-amber-300"
+  "2": "bg-amber-400"
 }
 
 interface IGame {
@@ -22,10 +23,14 @@ interface IGame {
   description: string;
 }
 
+interface IGameDetails extends IGame {
+  setSelectedGame: Setter<IGame | null>;
+}
+
 export {
   getGames,
   getGameImageById,
   GamePlatform,
   GameState
 }
-export type { IGame }
+export type { IGame, IGameDetails }

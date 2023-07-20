@@ -19,7 +19,7 @@ O Platinador classifica os jogos em dois estados, sendo eles:
 - [x] Dar funcionalidade ao campo de busca
 - [ ] Paginação
 - [x] Implementação da API (API da PS Store e API do Platinador)
-- [ ] Modal listando detalhes dos jogos cadastrados
+- [x] Modal listando detalhes dos jogos cadastrados
 - [ ] Realizar deploy
 
 ## Contribuindo

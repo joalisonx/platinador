@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
-import { IGame, getGameImageById } from "../utils";
+import { IGameDetails, getGameImageById } from "../utils";
 
-export const GameDetails: Component<IGame> = (props: IGame) => {
+export const GameDetails: Component<IGameDetails> = (props: IGameDetails) => {
   return (
     <section class="fixed inset-0 overflow-hidden">
       <div class="absolute inset-0 overflow-hidden">
@@ -9,7 +9,7 @@ export const GameDetails: Component<IGame> = (props: IGame) => {
         <div class="flex fixed inset-y-0 right-0 pl-10 max-w-full">
           <div class="relative w-96">
             <div class="absolute top-0 left-0 -ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4">
-              <button class="rounded-md text-gray-200 hover:text-white">
+              <button onClick={() => props.setSelectedGame(null)} class="rounded-md text-gray-200 hover:text-white">
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -19,7 +19,7 @@ export const GameDetails: Component<IGame> = (props: IGame) => {
               <div class="pb-16 space-y-6">
                 <div>
                   <div class="block w-full rounded-lg overflow-hidden">
-                    <img class="object-cover" alt="" src={getGameImageById(props.storeId)}/>
+                    <img class="object-cover" alt={props.name} src={getGameImageById(props.storeId)}/>
                   </div>
                   <div class="flex items-start justify-between mt-4">
                     <h2 class="text-lg font-medium text-gray-200">{props.name}</h2>
