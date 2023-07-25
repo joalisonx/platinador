@@ -1,12 +1,12 @@
 import { Component } from "solid-js";
-import { IGame, GamePlatform, GameState, getGameImageById } from "../utils";
+import { IGame, GamePlatform, GameState } from "../utils";
 
 export const Game: Component<IGame> = (props: IGame) => {
   return (
     <li>
       <div 
-        class="flex items-end justify-start w-full h-[256px] rounded-lg relative text-left bg-gray-950 bg-center bg-cover" 
-        style={`background-image: url('${getGameImageById(props.storeId)}');`}
+        class="flex items-end justify-start w-full h-[256px] rounded-lg relative text-left bg-gray-950 bg-center bg-cover hover:cursor-pointer" 
+        style={`background-image: url('${props.image}');`}
       >
         <div class="absolute top-0 bottom-0 left-0 right-0"></div>
         <div class="flex items-center justify-between mx-5 mt-3 absolute top-0 left-0 right-0">

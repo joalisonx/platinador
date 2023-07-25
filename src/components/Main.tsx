@@ -5,12 +5,15 @@ import { GameDetails } from "./GameDetails";
 import { Pagination } from "./Pagination";
 
 export const Main = () => {
-  const [data] = createResource<IGame[]>(getGames);
+  const [data] = createResource(getGames);
   const [filter, setFilter] = createSignal<string>("0");
   const [search, setSearch] = createSignal<string>("");
+  const [page, setPage] = createSignal<number>(1);
   const [selectedGame, setSelectedGame] = createSignal<IGame | null>();
-  const games = () => data()?.filter(i => i.name.toLowerCase().includes(search()));
-  
+  const games = () => data()
+    ?.filter(i => i.name.toLowerCase().includes(search()))
+    .slice((page() * 4) - 4, page() * 4);
+
   return (
     <>
       <section class="bg-gray-900">
@@ -58,8 +61,10 @@ export const Main = () => {
             )}</For>
           </ul>
         </div>
+        <Show when={games()?.length > 4}>
+        <Pagination pages={games()?.length} page={page} setPage={setPage}/>
+        </Show>
       </section>
-
       <Show when={selectedGame()}>
         <GameDetails {...selectedGame()} setSelectedGame={setSelectedGame}/>
       </Show>

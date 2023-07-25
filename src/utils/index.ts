@@ -1,5 +1,5 @@
-import { Setter } from "solid-js";
-import { getGames, getGameImageById } from "./requester";
+import { Accessor, Setter } from "solid-js";
+import { getGames } from "./requester";
 
 enum GamePlatform {
   "PS5" = "bg-blue-900",
@@ -17,7 +17,6 @@ interface IGame {
   name: string;
   platform: string;
   state: string;
-  storeId: string;
   image: string;
   updatedAt: Date;
   description: string;
@@ -27,10 +26,19 @@ interface IGameDetails extends IGame {
   setSelectedGame: Setter<IGame | null>;
 }
 
+interface IPagination {
+  pages: number;
+  page: Accessor<number>;
+  setPage: Setter<number>;
+}
+
 export {
   getGames,
-  getGameImageById,
   GamePlatform,
   GameState
 }
-export type { IGame, IGameDetails }
+export type { 
+  IGame, 
+  IGameDetails, 
+  IPagination
+}

@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import { IGameDetails, getGameImageById } from "../utils";
+import { IGameDetails } from "../utils";
 
 export const GameDetails: Component<IGameDetails> = (props: IGameDetails) => {
   return (
@@ -19,7 +19,7 @@ export const GameDetails: Component<IGameDetails> = (props: IGameDetails) => {
               <div class="pb-16 space-y-6">
                 <div>
                   <div class="block w-full rounded-lg overflow-hidden">
-                    <img class="object-cover" alt={props.name} src={getGameImageById(props.storeId)}/>
+                    <img class="object-cover" alt={props.name} src={props.image}/>
                   </div>
                   <div class="flex items-start justify-between mt-4">
                     <h2 class="text-lg font-medium text-gray-200">{props.name}</h2>
