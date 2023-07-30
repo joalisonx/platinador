@@ -11,8 +11,11 @@ export const Main = () => {
   const [page, setPage] = createSignal<number>(1);
   const [selectedGame, setSelectedGame] = createSignal<IGame | null>();
   const games = () => data()
-    ?.filter(i => i.name.toLowerCase().includes(search()))
-    .slice((page() * 4) - 4, page() * 4);
+    ?.filter(i => {
+      if(filter() !== "0") return i.state === filter();
+      else return i;
+    })
+    .filter(i => i.name.toLowerCase().includes(search())).slice((page() * 8) - 8, page() * 8);
 
   return (
     <>
@@ -28,7 +31,10 @@ export const Main = () => {
           <div class="mt-8 flex items-center justify-between">
             <div class="flex rounded border border-gray-200 text-gray-200">
               <div class="relative">
-                <input onInput={ev => setSearch(ev.currentTarget.value.toLowerCase())}
+                <input onInput={ev => {
+                    setSearch(ev.currentTarget.value.toLowerCase());
+                    setPage(1);
+                }}
                   type="text" id="search" placeholder=" Pesquisar"
                   class="w-full rounded placeholder-gray-200 bg-transparent h-10 shadow-sm sm:text-sm"
                 />
@@ -44,7 +50,10 @@ export const Main = () => {
               </div>
             </div>
             <div>
-              <select value={filter()} onInput={ev => setFilter(ev.currentTarget.value)}
+              <select value={filter()} onInput={ev => {
+                setFilter(ev.currentTarget.value);
+                setPage(1);
+              }}
                 class="bg-transparent h-10 text-gray-200 rounded border border-gray-200 text-sm"
               >
                 <option value={0} class="bg-gray-900">Tudo</option>
@@ -54,15 +63,15 @@ export const Main = () => {
             </div>
           </div>
           <ul class="grid gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-4">
-            <For each={filter() !== "0" ? games().filter(i => i.state === filter()) : games()}>{game => (
+            <For each={games()}>{game => (
               <div onClick={() => setSelectedGame(game)}>
                 <Game {...game}/>
               </div>
             )}</For>
           </ul>
         </div>
-        <Show when={games()?.length > 4}>
-        <Pagination pages={games()?.length} page={page} setPage={setPage}/>
+        <Show when={data()?.length > 8}>
+          <Pagination pages={games()?.length} page={page} setPage={setPage}/>
         </Show>
       </section>
       <Show when={selectedGame()}>
