@@ -1,7 +1,8 @@
-import { For, Show, createSignal, createResource } from "solid-js";
+import { For, Show, ErrorBoundary, createSignal, createResource } from "solid-js";
 import { IGame, getGames } from "../utils";
 import { Game } from "./Game";
 import { GameDetails } from "./GameDetails";
+import { Error } from "./Error";
 import { Pagination } from "./Pagination";
 
 export const Main = () => {
@@ -18,7 +19,7 @@ export const Main = () => {
     .filter(i => i.name.toLowerCase().includes(search())).slice((page() * 8) - 8, page() * 8);
 
   return (
-    <>
+    <ErrorBoundary fallback={err => <Error error={err.message}/>}>
       <section class="bg-gray-900">
         <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
           <div>
@@ -32,8 +33,8 @@ export const Main = () => {
             <div class="flex rounded border border-gray-200 text-gray-200">
               <div class="relative">
                 <input onInput={ev => {
+                    if(page() !== 1) setPage(1);
                     setSearch(ev.currentTarget.value.toLowerCase());
-                    setPage(1);
                 }}
                   type="text" id="search" placeholder=" Pesquisar"
                   class="w-full rounded placeholder-gray-200 bg-transparent h-10 shadow-sm sm:text-sm"
@@ -51,8 +52,8 @@ export const Main = () => {
             </div>
             <div>
               <select value={filter()} onInput={ev => {
+                if(page() !== 1) setPage(1);
                 setFilter(ev.currentTarget.value);
-                setPage(1);
               }}
                 class="bg-transparent h-10 text-gray-200 rounded border border-gray-200 text-sm"
               >
@@ -77,6 +78,6 @@ export const Main = () => {
       <Show when={selectedGame()}>
         <GameDetails {...selectedGame()} setSelectedGame={setSelectedGame}/>
       </Show>
-    </>
+    </ErrorBoundary>
   );
 }

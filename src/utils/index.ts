@@ -32,6 +32,10 @@ interface IPagination {
   setPage: Setter<number>;
 }
 
+interface IError {
+  error: string;
+}
+
 export {
   getGames,
   GamePlatform,
@@ -40,5 +44,6 @@ export {
 export type { 
   IGame, 
   IGameDetails, 
-  IPagination
+  IPagination,
+  IError
 }

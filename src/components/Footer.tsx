@@ -2,11 +2,10 @@ export const Footer = () => {
   return (
     <footer class="bg-gray-950">
       <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-        <p class="mx-auto mt-6 max-w-md text-center text-gray-200">
-          <strong>OBS: </strong>As imagens podem não condizer com o jogo em questão.
-          Oriente-se pelos indicadores de plataforma e título.
-        </p>
-        <ul class="flex justify-center gap-6 mt-12 md:gap-8">
+        <h1 class="mx-auto mt-6 max-w-md text-center text-gray-200">
+          <strong>O Platinador não é endossado a Sony ou PlayStation.</strong>
+        </h1>
+        <ul class="flex justify-center gap-6 mt-8 md:gap-8">
           <li>
             <a href="/" target="_blank" class="text-gray-200 transition hover:text-gray-200/75">
               <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
