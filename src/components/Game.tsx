@@ -13,7 +13,7 @@ export const Game: Component<IGame> = (props: IGame) => {
           <span class="px-3 py-2"></span>
           <div class="flex justify-between gap-2">
             <span title={props.state === "1" ? "Implatinável" : "Em restrição"} class={`inline-flex items-center justify-center rounded-full 
-            ${GameState[props.state]} px-2.5 py-1 text-gray-100
+              ${GameState[props.state]} px-2.5 py-1 text-gray-100
             `}>
               <svg 
                 class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" 

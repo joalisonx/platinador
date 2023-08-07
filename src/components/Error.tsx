@@ -9,9 +9,7 @@ export const Error: Component<IError> = (props: IError) => {
           Ops...
         </p>
         <p class="mt-4 text-gray-200">
-          {props.error === "Failed to fetch" ?
-            "Algo deu errado enquanto o Platinador buscava a lista de jogos."
-          : props.error}
+          {props.error}
         </p>
       </div>
     </div>

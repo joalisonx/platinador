@@ -1,4 +1,4 @@
-import { For, Show, ErrorBoundary, createSignal, createResource } from "solid-js";
+import { For, Show, ErrorBoundary, createSignal, createResource, onMount } from "solid-js";
 import { IGame, getGames } from "../utils";
 import { Game } from "./Game";
 import { GameDetails } from "./GameDetails";
@@ -6,17 +6,18 @@ import { Error } from "./Error";
 import { Pagination } from "./Pagination";
 
 export const Main = () => {
-  const [data] = createResource(getGames);
   const [filter, setFilter] = createSignal<string>("0");
   const [search, setSearch] = createSignal<string>("");
   const [page, setPage] = createSignal<number>(1);
+
+  const [data, {mutate, refetch}] = createResource(getGames);
   const [selectedGame, setSelectedGame] = createSignal<IGame | null>();
-  const games = () => data()
-    ?.filter(i => {
-      if(filter() !== "0") return i.state === filter();
-      else return i;
-    })
-    .filter(i => i.name.toLowerCase().includes(search())).slice((page() * 8) - 8, page() * 8);
+  const games = () => data()?.filter(i => {
+    if(filter() !== "0") return i.state === filter();
+    else return i;
+  }).filter(i => i.name.toLowerCase().includes(search())).slice((page() * 8) - 8, page() * 8);
+
+  onMount(() => setInterval(() => refetch(), 5 * 60000));
 
   return (
     <ErrorBoundary fallback={err => <Error error={err.message}/>}>
@@ -33,8 +34,8 @@ export const Main = () => {
             <div class="flex rounded border border-gray-200 text-gray-200">
               <div class="relative">
                 <input onInput={ev => {
-                    if(page() !== 1) setPage(1);
-                    setSearch(ev.currentTarget.value.toLowerCase());
+                  if(page() !== 1) setPage(1);
+                  setSearch(ev.currentTarget.value.toLowerCase());
                 }}
                   type="text" id="search" placeholder=" Pesquisar"
                   class="w-full rounded placeholder-gray-200 bg-transparent h-10 shadow-sm sm:text-sm"
