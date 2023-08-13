@@ -1,4 +1,4 @@
-import { For, Show, ErrorBoundary, createSignal, createResource, onMount } from "solid-js";
+import { For, Show, ErrorBoundary, createSignal, createResource, onMount, onCleanup } from "solid-js";
 import { IGame, getGames } from "../utils";
 import { Game } from "./Game";
 import { GameDetails } from "./GameDetails";
@@ -6,6 +6,7 @@ import { Error } from "./Error";
 import { Pagination } from "./Pagination";
 
 export const Main = () => {
+  let interval: number;
   const [filter, setFilter] = createSignal<string>("0");
   const [search, setSearch] = createSignal<string>("");
   const [page, setPage] = createSignal<number>(1);
@@ -17,7 +18,8 @@ export const Main = () => {
     else return i;
   }).filter(i => i.name.toLowerCase().includes(search())).slice((page() * 8) - 8, page() * 8);
 
-  onMount(() => setInterval(() => refetch(), 5 * 60000));
+  onMount(() => interval = setInterval(() => refetch(), 5 * 60000));
+  onCleanup(() => clearInterval(interval))
 
   return (
     <ErrorBoundary fallback={err => <Error error={err.message}/>}>
