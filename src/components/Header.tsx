@@ -12,7 +12,7 @@ export const Header = () => {
             em um lugar só!
           </p>
           <div class="flex flex-wrap justify-center gap-4 mt-8">
-            <button onClick={() => window.scrollTo({top: 478, behavior: "smooth"})} class="block w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto">
+            <button onClick={() => window.scrollTo({top: 478, behavior: "smooth"})} class="block w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent focus:outline-none focus:ring active:text-opacity-75 sm:w-auto">
               Me mostra
             </button>
           </div>

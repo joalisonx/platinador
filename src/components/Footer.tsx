@@ -2,6 +2,13 @@ export const Footer = () => {
   return (
     <footer class="bg-gray-950">
       <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <a href={import.meta.env.VITE_FORM_URL} target="_blank"
+            class="mt-4 inline-block rounded border bg-blue-600 border-blue-600 px-10 py-2 font-medium text-white hover:bg-transparent focus:outline-none focus:ring active:text-opacity-75"
+          >
+            Sugerir jogo
+          </a>
+        </div>
         <h1 class="mx-auto mt-6 max-w-md text-center text-gray-200">
           <strong>O Platinador não é endossado a Sony ou PlayStation.</strong>
         </h1>
